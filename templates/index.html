@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Forecast Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f4f4f4;
+        }
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin: auto;
+            margin-bottom: 40px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #0074D9;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 40px;
+        }
+        .chart-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        img {
+            width: 400px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>📊 Product Orders by Year</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Product</th>
+                <th>Order Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in yearly_orders %}
+            <tr>
+                <td>{{ row['Year'] }}</td>
+                <td>{{ row['Product'] }}</td>
+                <td>{{ row['Count'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="chart-container">
+        <h2>📊 Product Distribution in {{ latest_year }}</h2>
+        <img src="{{ latest_year_pie }}" alt="Latest Year Product Distribution Pie Chart">
+    </div>
+
+    <h2>📦 Forecasted Product Demand for Next Week</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Predicted Units</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in forecast %}
+            <tr>
+                <td>{{ row['Product'] }}</td>
+                <td>{{ row['Predicted_Next_Week'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="chart-container">
+        <h2>📊 Forecasted Product Share for Next Week</h2>
+        <img src="{{ forecast_pie }}" alt="Forecast Pie Chart">
+    </div>
+
+</body>
+</html>
